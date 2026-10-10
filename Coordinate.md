@@ -2,7 +2,7 @@
 
 This project uses sensor measurements collected using Sensor Logger on an Android device. Understanding the coordinate system is essential for correctly processing accelerometer, gyroscope, and GPS measurements during sensor fusion.
 
-Reference: [Sensor Logger Coordinate Systems](https://github.com/tszheichoi/awesome-sensor-logger)
+Reference: [Sensor Logger Coordinate Systems](https://github.com/tszheichoi/awesome-sensor-logger/blob/main/COORDINATES.md)
 
 ### 1. Accelerometer Coordinate System
 
