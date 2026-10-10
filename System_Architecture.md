@@ -1,53 +1,44 @@
-`
-             RAW SENSOR DATA
-                    |
-          +---------+---------+
-          |                   |
-   Accelerometer CSV      Gyroscope CSV
-          |                   |
-          +---------+---------+
-                    |
-                    v
-           synchronize.py
-                    |
-                    v
-           Synchronized_IMU.csv
-                    |
-                    |                  GPS Location.csv
-                    |                         |
-                    |                         v
-                    |                  gps_to_enu.py
-                    |                         |
-                    |                         v
-                    |                     GPS_ENU.csv
-                    |                         |
-                    +------------+------------+
-                                 |
-                                 v
-                         gtsam_fusion_csv.py
-                                 |
-                                 v
-                         GTSAM Fusion Core
-                                 |
-                    +------------+------------+
-                    |                         |
-                    v                         v
-              IMU constraints            GPS constraints
-                    |                         |
-                    +------------+------------+
-                                 |
-                                 v
-                           Factor Graph
-                                 |
-                                 v
-                        ISAM2 Optimization
-                                 |
-                                 v
-                        Fused_Trajectory.csv
-                                 |
-                                 v
-                        plot_trajectory.py
-                                 |
-                                 v
-                       Fused_Trajectory.png
-                       `
+```text
+                 RAW SENSOR DATA
+                         |
+          +--------------+--------------+
+          |              |              |
+          v              v              v
+    Accelerometer     Gyroscope         GPS
+          |              |              |
+          +------+-------+              |
+                 |                      |
+                 v                      |
+         IMU Synchronization            |
+         (synchronize.py)               |
+                 |                      |
+                 v                      v
+        Synchronized_IMU.csv       GPS Conversion
+                                   (gps_to_enu.py)
+                                        |
+                                        v
+                                    GPS_ENU.csv
+                 |                      |
+                 +----------+-----------+
+                            |
+                            v
+                    +---------------+
+                    |     GTSAM     |
+                    |               |
+                    | IMU Processing|
+                    | GPS Factors   |
+                    | Bias Estimation
+                    | ISAM2 Updates |
+                    +-------+-------+
+                            |
+                            v
+                  Fused_Trajectory.csv
+                            |
+                            v
+                       Matplotlib
+                            |
+                            v
+                  Fused_Trajectory.png
+```
+
+---
