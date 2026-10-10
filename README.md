@@ -111,22 +111,15 @@ The pipeline consists of the following stages:
 ## Technologies Used
 
 | Technology | Purpose |
-
-|Python | Main programming language | 
- 
-|GTSAM | Factor-graph-based sensor fusion |
- 
-|NumPy | Numerical computation |
-
-|Pandas | CSV processing and timestamp synchronization |
-
-|UTM | Projection of geographic GPS coordinates |
-
-|ENU | Local East-North-Up coordinate representation |
-
-|Matplotlib | Trajectory visualization |
-
-|ISAM2 | Incremental optimization supported by GTSAM |
+|---|---|
+|`Python` | Main programming language |  
+|`GTSAM` | Factor-graph-based sensor fusion |
+|`NumPy `| Numerical computation |
+|`Pandas `| CSV processing and timestamp synchronization |
+|`UTM `| Projection of geographic GPS coordinates |
+|`ENU `| Local East-North-Up coordinate representation |
+|`Matplotlib` | Trajectory visualization |
+|`ISAM2` | Incremental optimization supported by GTSAM |
 
 
 
