@@ -263,8 +263,6 @@ Matplotlib is used for visualization; it does not perform sensor fusion.
 
 ### 1. Clone the repository
 
-Replace `https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM` with the URL of your own GitHub repository.
-
 ```bash
 git clone https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM
 cd imu_gps_gtsam
