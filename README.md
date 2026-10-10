@@ -662,4 +662,4 @@ Potential improvements include:
 **Result:** A CSV-based GPS-IMU processing pipeline that produces a trajectory output and a visualization for further evaluation.
 
    ### View My Dataset Output:
-     To see the actual output and results of my IMU–GPS sensor fusion project, visit the [README.md – Output and Results](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/edit/main/        README.md) section in my GitHub repository.
+   To see the actual output and results of my IMU–GPS sensor fusion project, visit the [README.md – Output and Results](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/edit/main/        README.md) section in my GitHub repository.
