@@ -61,3 +61,172 @@ The pipeline consists of the following stages:
 6. Estimate IMU biases and update the state estimate.
 7. Generate the trajectory output.
 8. Visualize the result using Matplotlib.
+
+
+
+## Technologies Used
+
+| Technology | Purpose |
+
+| Python | Main programming language |
+| GTSAM | Factor-graph-based sensor fusion |
+| NumPy | Numerical computation |
+| Pandas | CSV processing and timestamp synchronization |
+| UTM | Projection of geographic GPS coordinates |
+| ENU | Local East-North-Up coordinate representation |
+| Matplotlib | Trajectory visualization |
+| ISAM2 | Incremental optimization supported by GTSAM |
+
+
+
+## Project Structure
+
+```text
+imu_gps_gtsam/
+│
+├── data/
+│   ├── AccelerometerUncalibrated.csv
+│   ├── GyroscopeUncalibrated.csv
+│   └── Location.csv
+│
+├── output/
+│   ├── Synchronized_IMU.csv
+│   ├── GPS_ENU.csv
+│   ├── Fused_Trajectory.csv
+│   └── Fused_Trajectory.png
+│
+├── scripts/
+│   ├── synchronize.py
+│   ├── gps_to_enu.py
+│   ├── gtsam_fusion_core.py
+│   ├── gtsam_fusion_csv.py
+│   └── plot_trajectory.py
+│
+├── README.md
+└── requirements.txt
+```
+
+*Note: The structure above represents the expected project layout. Generated files appear in `output/` after running the corresponding scripts.*
+
+
+## Working Process
+### 1. Sensor Data Collection
+ The Sensor Logger App
+
+Sensor Logger is a free, easy-to-use, cross-platform data logger that logs readings from common motion-related sensors on smartphones. Once completed, recordings can be exported as a zipped CSV file, JSON, SQLite, KML or be viewed within the app via interactive plots. There is also a free companion watch app (WatchOS and WearOS) that allows you to log heart rate & wrist motion, and control recording sessions remotely from your wrist. Supported sensors and measurements include:
+
+    Device Acceleration (Accelerometer; Raw & Calibrated), G-Force
+    Gravity Vector (Accelerometer)
+    Device Rotation Rate (Gyroscope)
+    Device Orientation (Gyroscope; Raw & Calibrated)
+    Magnetic Field (Magnetometer; Raw & Calibrated)
+    Compass
+    Barometric Altitude (Barometer), Atmospheric Pressure
+    GPS: Altitude, Speed, Heading, Latitude, Longitude
+    Audio (Microphone)
+    Loudness (Microphone), Sound Meter
+    Camera Images (Front & Back, Foreground)
+    Camera Depth (Front & Back, Foreground, iOS Only)
+    Camera Video (Front & Back, Foreground)
+    Pedometer
+    Activity
+    Heart Rate
+    Wrist Motion
+    Watch Location
+    Watch Barometer
+    Watch Magnetometer
+    Watch Compass
+    Watch Microphone
+    Light Sensor (Android Only)
+    Annotations (Timestamp and Text)
+    Device Battery Level and State
+    Device Screen Brightness Level
+    Nearby Bluetooth Beacons (All Advertised Data)
+    Nearby WiFi Networks (Android Only)
+    Battery Temperature (Android Only)
+    Headphone Motion (Requires AirPods)
+    Network
+
+Learn more and download Sensor Logger at www.tszheichoi.com/sensorlogger.
+
+
+The project uses three input CSV files.
+
+**Accelerometer**
+
+Measures acceleration along three axes:
+
+```text
+ax, ay, az
+```
+
+**Gyroscope**
+
+Measures angular velocity around three axes:
+
+```text
+gx, gy, gz
+```
+
+**GPS**
+
+Provides geographic position measurements, including latitude, longitude, altitude, and timestamps.
+
+
+
+### 2. IMU Synchronization
+
+The accelerometer and gyroscope may record measurements at slightly different timestamps.
+
+The `synchronize.py` script matches measurements using nearby timestamps and creates a synchronized IMU dataset.
+
+Output:
+
+```text
+output/Synchronized_IMU.csv
+```
+
+### 3. GPS Coordinate Conversion
+
+GPS provides latitude and longitude in geographic coordinates.
+
+The `gps_to_enu.py` script uses UTM projection to obtain metric Easting and Northing coordinates. It then subtracts the initial position to create a local reference frame.
+
+The output represents:
+
+- **East:** local eastward displacement in meters.
+- **North:** local northward displacement in meters.
+- **Up:** relative altitude in meters.
+
+Output:
+
+```text
+output/GPS_ENU.csv
+```
+
+
+### 4. GTSAM Sensor Fusion
+
+The `gtsam_fusion_core.py` module implements the main fusion logic.
+
+The fusion pipeline uses IMU measurements and GPS position measurements to estimate the trajectory.
+
+The implementation includes components such as:
+
+- IMU preintegration
+- GPS position factors
+- IMU bias modeling
+- Incremental updates using ISAM2
+
+The exact behavior depends on the implementation and its configuration.
+
+
+### 5. Trajectory Generation
+
+The `gtsam_fusion_csv.py` script loads the processed CSV files and passes measurements to the fusion core.
+
+It saves the resulting trajectory to:
+
+```text
+output/Fused_Trajectory.csv
+```
