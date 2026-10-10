@@ -1,40 +1,42 @@
-               RAW SENSOR DATA
-                         |
-          +--------------+--------------+
-          |              |              |
-          v              v              v
-    Accelerometer     Gyroscope         GPS
-          |              |              |
-          +------+-------+              |
-                 |                      |
-                 v                      |
-         IMU Synchronization            |
-         (synchronize.py)               |
-                 |                      |
-                 v                      v
-        Synchronized_IMU.csv       GPS Conversion
-                                   (gps_to_enu.py)
-                                        |
-                                        v
-                                    GPS_ENU.csv
-                 |                      |
-                 +----------+-----------+
-                            |
-                            v
-                    +---------------+
-                    |     GTSAM     |
-                    |               |
-                    | IMU Processing|
-                    | GPS Factors   |
-                    | Bias Estimation
-                    | ISAM2 Updates |
-                    +-------+-------+
-                            |
-                            v
-                  Fused_Trajectory.csv
-                            |
-                            v
-                       Matplotlib
-                            |
-                            v
-                  Fused_Trajectory.png
+INPUT
+  |
+  +-- AccelerometerUncalibrated.csv
+  |
+  +-- GyroscopeUncalibrated.csv
+  |
+  +-- Location.csv
+          |
+          v
+PREPROCESSING
+  |
+  +-- synchronize.py
+  |       |
+  |       v
+  |   Synchronized_IMU.csv
+  |
+  +-- gps_to_enu.py
+          |
+          v
+      GPS_ENU.csv
+          |
+          v
+GTSAM FUSION
+  |
+  +-- Read IMU measurements
+  |
+  +-- Read GPS measurements
+  |
+  +-- Create/update motion states
+  |
+  +-- Add IMU and GPS factors
+  |
+  +-- Model IMU bias and measurement noise
+  |
+  +-- Optimize using ISAM2
+          |
+          v
+OUTPUT
+  |
+  +-- Fused_Trajectory.csv
+  |
+  +-- Fused_Trajectory.png
