@@ -680,7 +680,7 @@ Potential improvements include:
 
 ### Dataset Output
 
-To explore the dataset processing results, IMU synchronization, GPS coordinate conversion, and fused trajectory, visit the [Output and Results section](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM).
+To explore the dataset processing results, IMU synchronization, GPS coordinate conversion, and fused trajectory, visit the [Output.md section](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output.md).
 
 ---
 
