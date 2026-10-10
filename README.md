@@ -68,14 +68,21 @@ The pipeline consists of the following stages:
 
 | Technology | Purpose |
 
-| Python | Main programming language |
-| GTSAM | Factor-graph-based sensor fusion |
-| NumPy | Numerical computation |
-| Pandas | CSV processing and timestamp synchronization |
-| UTM | Projection of geographic GPS coordinates |
-| ENU | Local East-North-Up coordinate representation |
-| Matplotlib | Trajectory visualization |
-| ISAM2 | Incremental optimization supported by GTSAM |
+ Python---Main programming language 
+ 
+GTSAM---Factor-graph-based sensor fusion
+ 
+NumPy---Numerical computation
+
+Pandas---CSV processing and timestamp synchronization
+
+UTM---Projection of geographic GPS coordinates
+
+ENU---Local East-North-Up coordinate representation
+
+Matplotlib---Trajectory visualization
+
+ISAM2---Incremental optimization supported by GTSAM
 
 
 
@@ -183,14 +190,14 @@ The `synchronize.py` script matches measurements using nearby timestamps and cre
 Output:
 
 ```text
-output/Synchronized_IMU.csv
+github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output/GPS_ENU.csv
 ```
 
 ### 3. GPS Coordinate Conversion
 
 GPS provides latitude and longitude in geographic coordinates.
 
-The `gps_to_enu.py` script uses UTM projection to obtain metric Easting and Northing coordinates. It then subtracts the initial position to create a local reference frame.
+The `https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output/GPS_ENU.csv` script uses UTM projection to obtain metric Easting and Northing coordinates. It then subtracts the initial position to create a local reference frame.
 
 The output represents:
 
@@ -201,7 +208,7 @@ The output represents:
 Output:
 
 ```text
-output/GPS_ENU.csv
+https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output/GPS_ENU.csv
 ```
 
 
