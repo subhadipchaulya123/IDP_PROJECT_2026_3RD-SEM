@@ -547,6 +547,10 @@ If configured in the implementation, ISAM2 can update the state estimate increme
 
 > **Implementation note:** IMU preintegration, GPS factors, bias estimation, and ISAM2 should only be described as implemented features when they are present in the actual source code.
 
+
+
+
+For more gtsam information see <gtsam_working_process.md'https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/gtsam_working_process.md'> part
 ---
 
 ## Limitations
