@@ -661,3 +661,27 @@ Potential improvements include:
 
    ### View My Dataset Output:
    To see the actual output and results of my IMU–GPS sensor fusion project, visit the [README.md – Output and Results](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output.md) section in my GitHub repository.
+
+
+---
+
+## Author
+
+**Subhadip Chaulya**
+
+- **University:** Adamas University
+- **Department:** Computer Science and Engineering
+- **Specialization:** Artificial Intelligence and Machine Learning
+- **Project:** IMU–GPS Sensor Fusion Using GTSAM
+
+### Project Repository
+
+[View My Project on GitHub](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM)
+
+### Dataset Output
+
+To explore the dataset processing results, IMU synchronization, GPS coordinate conversion, and fused trajectory, visit the [Output and Results section](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM).
+
+---
+
+*Developed as part of an academic project at Adamas University.*
