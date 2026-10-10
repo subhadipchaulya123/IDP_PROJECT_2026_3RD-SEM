@@ -550,7 +550,7 @@ If configured in the implementation, ISAM2 can update the state estimate increme
 
 
 
-For more gtsam information see <gtsam_working_process.md'> part
+For more gtsam information see [GTSAM_WORKING_PROCESS](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/gtsam_working_process.md)
 ---
 
 ## Limitations
