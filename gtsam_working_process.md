@@ -87,6 +87,7 @@ As new measurements arrive, the system can add new variables and factors, then u
 
 Conceptually, the process is:
 
+```text
 Initial state
      |
      v
@@ -106,6 +107,7 @@ Process next measurements
      |
      v
 Update estimate again
+```
 
 iSAM2 is useful when measurements arrive continuously because it can update the solution without rebuilding and solving the entire optimization problem from scratch each time.
 
