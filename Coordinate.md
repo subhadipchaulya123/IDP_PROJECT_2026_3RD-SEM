@@ -1,69 +1,104 @@
-# One-Page Coordinates Reference
+## Coordinate Systems and Sensor Conventions (Android)
 
-This page is a comprehensive documentation of the coordinate systems used by Sensor Logger. Should you notice any error, please report by making an Issue or making a pull request directly. Additional information about sensors and measurements is available in-app by tapping the "eye" icon next to each sensor.
+This project uses sensor measurements collected using Sensor Logger on an Android device. Understanding the coordinate system is essential for correctly processing accelerometer, gyroscope, and GPS measurements during sensor fusion.
 
-For information about units, refer to https://github.com/tszheichoi/awesome-sensor-logger/blob/main/UNITS.md
+Reference: [Sensor Logger Coordinate Systems](https://github.com/tszheichoi/awesome-sensor-logger)
 
-## Acceleration on Phones
+### 1. Accelerometer Coordinate System
 
-Acceleration is reported in the following coordinate system, with `x` and `y` being the horizontal and vertical axes of the screen and `z` pointing into/out of the screen. These axes "stick" to the device, so they never change even when the phone rotates.
+On Android, the accelerometer uses a device-local coordinate system:
 
-### Differences Between iOS and Android
+- **X-axis:** Horizontal axis across the phone's screen.
+- **Y-axis:** Vertical axis along the phone's screen.
+- **Z-axis:** Perpendicular to the screen, pointing outward from the front of the phone under the standard Android device coordinate convention.
 
-This is what the coordinate frames look like by operating systems. 
+The coordinate axes are fixed relative to the device. They rotate with the phone when it changes orientation.
 
-<img width="966" alt="Screenshot 2024-02-24 at 00 57 04" src="https://github.com/tszheichoi/awesome-sensor-logger/assets/30114997/ec93559b-5443-48a1-85e0-7c05fde6b723">
+The accelerometer measures acceleration along these three axes. The reported values depend on the sensor convention, phone orientation, and whether gravity is included in the measurements.
 
-_IMPORTANT: These diagrams show the direction of the applied force. This is different to the diagrams on Apple's official documentation, which shows the inertial force (exact opposite). https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager._ 
+For example, when a phone lies flat with its screen facing upward, the Android gravity vector typically points along the positive Z-axis.
 
-While the directions of the axes are the same across platforms, **there is a negative sign difference for all three axes** between iOS and Android. For example, if you move your phone to the right, along the `x` axis, you will register positive values on Android, but negative values on iOS. This is simply a difference in definition -- likely because iOS' convention is in the context of _inertial force_, whereas Android's convention is in the context of _accelerating force_. 
+**Important:** Confirm whether your CSV contains raw, uncalibrated, or gravity-compensated acceleration before using the measurements in GTSAM.
 
-Accordingly, the Gravity sensor is also different by a negative sign between iOS and Android. When you place your phone flat on a table, the gravity vector points in `-z` on iOS and `+z` on Android. 
+### 2. Gyroscope Coordinate System
 
-> 💡: **New in Version 1.29**: Toggling **Standardise Units & Frames** under _Settings > Sensor Configuration_ will eliminate this difference by automatically converting values logged on iOS to the Android convention. See [this](https://github.com/tszheichoi/awesome-sensor-logger/blob/main/CROSSPLATFORM.md) for more information. 
+The gyroscope measures angular velocity around the same device-local X, Y, and Z axes.
 
-## Acceleration on Apple Watch & AirPods
-Acceleration data from the Apple Watch follows the same convention as the iPhone. The acceleration values from the Headphone motion sensor follow the following convention. 
+- **X-axis:** Rotation around the phone's X-axis.
+- **Y-axis:** Rotation around the phone's Y-axis.
+- **Z-axis:** Rotation around the phone's Z-axis.
 
-<img src="https://github.com/tszheichoi/awesome-sensor-logger/assets/30114997/bf2600df-d624-4cb3-acd2-44ef633628f5" width="200"/>
+Angular velocity is typically expressed in radians per second (rad/s), but the actual units must be verified from the recorded data.
 
-_Source: https://developer.apple.com/documentation/coremotion/cmheadphonemotionmanager_
+The gyroscope's axes rotate with the device. Therefore, gyroscope measurements must be interpreted using the phone's orientation and the coordinate-frame conventions of the fusion algorithm.
 
-This photo below roughly aligns the coordinates for all three Apple devices. The coordinate system across the three pictured devices is always the same and consistent. Note this refers to the device-local axes only, and does not mean the devices share a common world reference frame for orientation. As such, it is safe to compare and perform data fusion amongst measurements from these devices. However, they collectively are inconsistent with Android's coordinate system, as noted in the previous section. Toggling "Standardise Units & Frames" under _Settings > Sensor Configuration_ will convert _all measurements from Apple Watch and AirPods_ to Android's convention. Also note that the [units](https://github.com/tszheichoi/awesome-sensor-logger/blob/main/UNITS.md) of acceleration vary across iPhone, Apple Watch and AirPods if "Standardise Units & Frames" is not toggled on. 
+### 3. Android Orientation Convention
 
-<img width="977" alt="Screenshot 2024-03-07 at 00 39 40" src="https://github.com/tszheichoi/awesome-sensor-logger/assets/30114997/ce79333d-75f5-4b83-a8fd-3c87c15222dd">
+Sensor Logger can report orientation values derived from rotation measurements or other orientation-estimation methods.
 
-This plot compares the units and coordinate system of acceleration data from all three Apple devices with "Standardise Units & Frames" toggled on (Note: "Standardise Units & Frames" is off by default). 
+According to the Sensor Logger documentation:
 
-<img width="1109" alt="Screenshot 2024-03-07 at 00 34 38" src="https://github.com/tszheichoi/awesome-sensor-logger/assets/30114997/1cd383f6-4227-4fd8-8fcd-c54288476214">
+- **Roll:** Rotation around the Y-axis.
+- **Pitch:** Rotation around the X-axis.
+- **Yaw:** Rotation around the Z-axis.
 
-## Gyroscope
+Sensor Logger describes its orientation convention using an intrinsic Z-X′-Y″ Tait–Bryan rotation sequence.
 
-The rotation rates and orientation are measured around the same axes as acceleration. When you read off the Gyroscope sensor in Sensor Logger, refer to the diagram below.
+Orientation conventions can differ between operating systems and sensor implementations. The orientation values should therefore not be mixed with other coordinate conventions without checking their definitions.
 
-<img src="https://github.com/tszheichoi/awesome-sensor-logger/assets/30114997/ac11f346-2c49-40f1-a5e0-4c711ab978f3" width="200"/>
+**Note:** This project should use Android-compatible conventions consistently throughout preprocessing and sensor fusion.
 
-_Source: https://developer.apple.com/documentation/coremotion/getting_raw_gyroscope_events_
+### 4. Gravity and Acceleration
 
-For the rotation rate readings from the Gyroscope sensor, iOS and Android have consistent definitions. 
+Gravity is an important consideration when processing accelerometer measurements.
 
-## Orientation
-The orientation is derived from the rotation rate and references the same axes. To be specific:
-- `roll` refers to the rotation around `y`;
-- `pitch` refers to the rotation around `x`;
-- `yaw` refers to the rotation around `z`. Sometimes also called the `azimuth`.
+For an Android device lying flat with its screen facing upward, the gravity vector typically points along the positive Z-axis under the standard Android device coordinate convention.
 
-Orientation is reported using a Tait‑Bryan Z‑X′‑Y″ (yaw → pitch → roll) intrinsic rotation sequence, meaning the device is first rotated around the z axis (yaw), then the rotated x axis (pitch), and finally the twice-rotated y axis (roll). 
+However, the sign and magnitude of recorded acceleration depend on the sensor type and measurement convention.
 
-Additionally, orientation has an arbitrary offset, as it is an integrated value from the rotation rate (i.e. an integration constant). For this, Sensor Logger uses the `x-north-z-vertical` reference frame, meaning the `yaw` value is 0 when the `x` axis is aligned with the north (i.e. the angle between the device's `y` axis and the north). 
+Before integrating acceleration to estimate motion, determine whether the data represents:
 
-### Differences Between iOS and Android
-Due to legacy reasons and backwards compatibility reasons, there are some key differences in interpreting the yaw value:
+- Raw acceleration including gravity.
+- Linear acceleration with gravity removed.
+- Uncalibrated acceleration measurements that may include sensor bias.
 
-1. On iOS, north means the _true north_, whereas on Android, it refers to the _magnetic north_. You may have to account for this difference if you are comparing absolute values measured across platforms, though factors such as the accuracy of the magnetometer may outweigh such differences. 
-2. On iOS, `yaw` increases when you turn counterclockwise around the `z` axis (as pictured above, positive rotation around positive `z` following the right-handed system). On Android, `yaw` increases when you turn clockwise around the `z` axis (opposite to pictured above, negative rotation around positive `z` following the right-handed system; i.e. east is +π/2 and west is -π/2).
-3. On iOS, `pitch` decreases as you rotate around the `x` axis clockwise (negative rotation around positive `x` following the right-handed system). On Android, `pitch` decreases as you rotate around the `x` axis counterclockwise (i.e. tilting the phone's top edge towards you and the phone's bottom edge away from you when you hold your phone normally, positive rotation around positive `x` following the right-handed system).
+Incorrect handling of gravity can introduce substantial errors in estimated position and velocity.
 
-Further, on Android, there are additional Orientations you can log with various trade-offs. See https://github.com/tszheichoi/awesome-sensor-logger/blob/main/ORIENTATION.md. 
+### 5. Coordinate Transformation for GPS–IMU Fusion
 
-> 💡: **New in Version 1.29**: Toggling **Standardise Units & Frames** under _Settings > Sensor Configuration_ will eliminate 2 and 3 by automatically converting values logged on iOS to the Android convention. See [this](https://github.com/tszheichoi/awesome-sensor-logger/blob/main/CROSSPLATFORM.md) for more information. 
+GPS provides geographic coordinates, such as latitude and longitude, while the IMU measures motion in the phone's local coordinate frame.
+
+These measurements cannot be directly combined as if they used the same coordinate system.
+
+For sensor fusion, the implementation should establish consistent reference frames.
+
+A typical workflow is:
+
+1. Read the accelerometer and gyroscope measurements.
+2. Verify their units and device-local coordinate conventions.
+3. Synchronize the IMU measurements using timestamps.
+4. Convert GPS latitude and longitude into a local metric coordinate system, such as East-North-Up (ENU), when required.
+5. Apply the appropriate rotation and coordinate transformations between the device, navigation, and world frames.
+6. Use consistent coordinate conventions in the GTSAM estimation model.
+
+The transformations must account for the device's orientation and the relationship between its local axes and the navigation frame.
+
+### 6. Importance for GTSAM
+
+GTSAM uses mathematical models and optimization to estimate states from measurement constraints.
+
+Incorrect coordinate conventions can produce:
+
+- Incorrect acceleration directions.
+- Incorrect rotation estimates.
+- Inconsistent gravity compensation.
+- Incorrect GPS and IMU alignment.
+- Unreliable trajectory estimates.
+
+Therefore, verifying the Android sensor conventions is an important preprocessing step before performing IMU–GPS fusion.
+
+### Reference
+
+- [Sensor Logger Coordinate Systems](https://github.com/tszheichoi/awesome-sensor-logger)
+- [Sensor Logger Units Documentation](https://github.com/tszheichoi/awesome-sensor-logger/blob/main/UNITS.md)
+- [Android Sensors Overview](https://developer.android.com/develop/sensors-and-location/sensors/sensors_overview)
