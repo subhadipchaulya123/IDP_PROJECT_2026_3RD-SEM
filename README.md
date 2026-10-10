@@ -166,7 +166,41 @@ Learn more and download Sensor Logger:
 [https://www.tszheichoi.com/sensorlogger](https://www.tszheichoi.com/sensorlogger)
 
 
-The project uses three input CSV files.
+The project uses three input CSV files(uncalibrated gyroscope,accelerometer csv file and location file) .
+## Why Use Uncalibrated IMU Data?
+
+In this project, we use **uncalibrated accelerometer and gyroscope data** collected using the Sensor Logger smartphone application. Uncalibrated data provides raw sensor measurements along with information about the sensors' estimated biases.
+
+### Reasons for Using Uncalibrated Data
+
+1. **Realistic Sensor Measurements:** Uncalibrated data represents sensor readings before the operating system's calibration corrections are applied. This helps us study the behavior of IMU sensors under realistic conditions.
+
+2. **IMU Bias Estimation:** Accelerometers and gyroscopes may contain measurement biases. Using uncalibrated measurements allows us to investigate how GTSAM estimates and accounts for these biases during sensor fusion.
+
+3. **Understanding Sensor Errors:** Raw measurements may contain biases, noise, and other imperfections. Working with these measurements helps us understand how sensor errors affect motion estimation.
+
+4. **Improved Understanding of Sensor Fusion:** Using uncalibrated data helps us study how IMU measurements and GPS position observations complement each other during trajectory estimation.
+
+5. **Testing GTSAM's IMU Preintegration:** GTSAM supports IMU preintegration and bias estimation. Uncalibrated sensor measurements provide a useful input for evaluating these capabilities when appropriate sensor noise parameters and bias models are configured.
+
+### How Uncalibrated Data Is Used in Our Project
+
+The project follows these steps:
+
+1. Collect uncalibrated accelerometer and gyroscope data using Sensor Logger.
+2. Export the recorded sensor measurements into CSV files.
+3. Synchronize the accelerometer and gyroscope measurements using their timestamps.
+4. Prepare the synchronized IMU data and GPS measurements for the sensor fusion pipeline.
+5. Use GTSAM to combine IMU motion constraints and GPS position measurements.
+6. Estimate the device's trajectory using the configured optimization and sensor models.
+
+### Important Consideration
+
+Uncalibrated data does not automatically improve localization accuracy. It may contain larger biases and errors than calibrated data, so appropriate IMU noise parameters, bias initialization, and bias estimation are important.
+
+Also, uncalibrated sensor outputs can include estimated bias values in addition to the measured values, depending on the device and recording application. The exact CSV fields must be checked to determine which values are available.
+
+**Project Objective:** To investigate how uncalibrated smartphone IMU measurements can be combined with GPS data using GTSAM for trajectory estimation and sensor fusion.
 
 **Accelerometer**
 
