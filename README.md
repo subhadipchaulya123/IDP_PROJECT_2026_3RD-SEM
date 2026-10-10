@@ -540,11 +540,9 @@ xdg-open output/Fused_Trajectory.png
 | `Fused_Trajectory.png` | Visualization comparing GPS and fusion output |
 
 
-
-### View My Dataset Output
-
-To see the actual output and results of my IMU–GPS sensor fusion project, visit the [README.md – Output and Results](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/edit/main/README.md) section in my GitHub repository.
----
+### View My Dataset Output:
+   
+ To see the actual output and results of my IMU–GPS sensor fusion project, visit the [README.md – Output and Results](https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output.md) section in my GitHub repository.
 
 
 
