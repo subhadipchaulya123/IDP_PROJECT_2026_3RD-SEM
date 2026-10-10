@@ -267,7 +267,8 @@ gx, gy, gz
 Provides geographic position measurements, including latitude, longitude, altitude, and timestamps.
 
 **Understanding Units**
-see [UNITS](https://github.com/subhadipchaulya123/imu_gps_gtsam_____IDP_PROJECT_2026_3RD_SEM/blob/main/UNITS.md)
+
+See [UNITS](https://github.com/subhadipchaulya123/imu_gps_gtsam_____IDP_PROJECT_2026_3RD_SEM/blob/main/UNITS.md)
 
 
 ### 2. IMU Synchronization
@@ -339,7 +340,9 @@ output/Fused_Trajectory.png
 
 Matplotlib is used for visualization; it does not perform sensor fusion.
 
+## Cordinate System
 
+See [Coordinate System](https://github.com/subhadipchaulya123/imu_gps_gtsam_____IDP_PROJECT_2026_3RD_SEM/blob/main/Coordinate.md)  for the full documentation of coordinate systems.
 
 ## Installation
 
