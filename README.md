@@ -68,7 +68,7 @@ The pipeline consists of the following stages:
 
 | Technology | Purpose |
 
- Python---Main programming language 
+Python---Main programming language 
  
 GTSAM---Factor-graph-based sensor fusion
  
@@ -90,25 +90,22 @@ ISAM2---Incremental optimization supported by GTSAM
 
 ```text
 imu_gps_gtsam/
-│
+├── .venv/
 ├── data/
 │   ├── AccelerometerUncalibrated.csv
 │   ├── GyroscopeUncalibrated.csv
 │   └── Location.csv
-│
 ├── output/
 │   ├── Synchronized_IMU.csv
 │   ├── GPS_ENU.csv
 │   ├── Fused_Trajectory.csv
 │   └── Fused_Trajectory.png
-│
 ├── scripts/
 │   ├── synchronize.py
 │   ├── gps_to_enu.py
 │   ├── gtsam_fusion_core.py
 │   ├── gtsam_fusion_csv.py
 │   └── plot_trajectory.py
-│
 ├── README.md
 └── requirements.txt
 ```
@@ -340,13 +337,13 @@ Contains angular velocity measurements along three axes:
 
 ### 3. GPS Data
 
-**File:** `GPS_Time_Latitude_Longitude.csv`
+**File:** `Location.csv`
 
 Contains timestamped GPS measurements, including latitude and longitude.
 
 ### 4. Synchronized IMU Data
 
-**File:** `Synchronized_Uncalibrated_IMU.csv`
+**File:** `Synchronized_IMU.csv`
 
 Contains accelerometer and gyroscope measurements aligned using their timestamps.
 
