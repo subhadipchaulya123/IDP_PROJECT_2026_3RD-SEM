@@ -345,11 +345,25 @@ Contains timestamped GPS measurements, including latitude and longitude.
 
 **File:** `Synchronized_IMU.csv`
 
-Contains accelerometer and gyroscope measurements aligned using their timestamps.
+This file contains synchronized Inertial Measurement Unit (IMU) data, including accelerometer and gyroscope measurements. The data is organized and aligned using timestamps to maintain the correct temporal relationship between the sensor readings.
 
-The recorded dataset contains approximately 6,143 synchronized IMU samples and 50 GPS readings over approximately 30 seconds.
+The accelerometer provides linear acceleration measurements along the X, Y, and Z axes, while the gyroscope provides angular velocity measurements along the same three axes. These measurements help describe the device's motion and orientation over time.
 
-The measured IMU sampling rate is approximately 204.36 Hz.
+Before using the data for sensor fusion, the accelerometer and gyroscope measurements are synchronized to ensure that the readings correspond to the appropriate timestamps. This synchronization is important for maintaining temporal consistency during motion estimation.
+
+The synchronized IMU data serves as an input to the IMU–GPS sensor fusion pipeline. GTSAM uses IMU measurements with other available sensor information to estimate the device's position, orientation, and velocity over time.
+
+**Key Features:**
+- Contains accelerometer and gyroscope measurements.
+- Organizes sensor readings according to their timestamps.
+- Maintains temporal alignment between different IMU measurements.
+- Supports motion estimation and orientation tracking.
+- Provides input data for IMU–GPS sensor fusion using GTSAM.
+- Helps reduce synchronization-related inconsistencies during sensor data processing.
+
+**Purpose:** The primary purpose of this file is to provide temporally synchronized IMU measurements for subsequent processing, motion estimation, and integration with GPS data in the sensor fusion system.
+
+The measured IMU sampling rate is approximately 250 Hz.
 
 ---
 
