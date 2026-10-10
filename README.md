@@ -271,13 +271,13 @@ cd imu_gps_gtsam
 ### 2. Create a virtual environment
 
 ```bash
-python3 -m venv ~/imu_gps_data/venv
+python3 -m venv .venv
 ```
 
 Activate it:
 
 ```bash
-source ~/imu_gps_data/venv/bin/activate
+source .venv/bin/activate
 ```
 
 
@@ -373,7 +373,7 @@ cd ~/imu_gps_gtsam
 Activate the existing virtual environment:
 
 ```bash
-source ~/imu_gps_data/venv/bin/activate
+source .venv/bin/activate
 ```
 
 Ensure that `(venv)` appears in your terminal prompt.
@@ -459,7 +459,7 @@ After installation and placing the input files in `data/`, run:
 ```bash
 cd ~/imu_gps_gtsam
 
-source ~/imu_gps_data/venv/bin/activate
+source .venv/bin/activate
 
 python scripts/synchronize.py
 python scripts/gps_to_enu.py
@@ -512,6 +512,43 @@ Models accelerometer and gyroscope biases that can contribute to accumulated err
 **ISAM2**
 
 Supports incremental smoothing and optimization as new factors are processed.
+
+---
+
+
+## How GTSAM Works in This Project
+
+GTSAM (Georgia Tech Smoothing and Mapping) is a library for state estimation using factor graphs and optimization.
+
+The objective of this project is to combine IMU measurements with GPS position observations to estimate a movement trajectory.
+
+### 1. IMU Measurements
+
+The accelerometer measures acceleration along three axes, while the gyroscope measures angular velocity.
+
+These measurements provide high-frequency information about the motion of the device.
+
+### 2. GPS Measurements
+
+GPS provides geographic position measurements, including latitude and longitude.
+
+These measurements provide an external position reference for the trajectory estimation process.
+
+### 3. Factor-Graph-Based Estimation
+
+GTSAM represents the estimation problem using variables and factors that describe relationships between states and sensor measurements.
+
+The resulting estimate depends on the factors, noise models, and optimization methods implemented in the fusion code.
+
+### 4. IMU Preintegration and Bias Estimation
+
+If implemented in the fusion core, IMU preintegration summarizes high-frequency inertial measurements between states, while bias estimation accounts for systematic accelerometer and gyroscope errors.
+
+### 5. Incremental Optimization
+
+If configured in the implementation, ISAM2 can update the state estimate incrementally as new factors are processed.
+
+> **Implementation note:** IMU preintegration, GPS factors, bias estimation, and ISAM2 should only be described as implemented features when they are present in the actual source code.
 
 ---
 
