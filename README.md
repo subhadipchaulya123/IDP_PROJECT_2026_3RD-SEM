@@ -114,44 +114,56 @@ imu_gps_gtsam/
 
 
 ## Working Process
-### 1. Sensor Data Collection
- The Sensor Logger App
+## 1. Sensor Data Collection
 
-Sensor Logger is a free, easy-to-use, cross-platform data logger that logs readings from common motion-related sensors on smartphones. Once completed, recordings can be exported as a zipped CSV file, JSON, SQLite, KML or be viewed within the app via interactive plots. There is also a free companion watch app (WatchOS and WearOS) that allows you to log heart rate & wrist motion, and control recording sessions remotely from your wrist. Supported sensors and measurements include:
+### Sensor Logger App
 
-    Device Acceleration (Accelerometer; Raw & Calibrated), G-Force
-    Gravity Vector (Accelerometer)
-    Device Rotation Rate (Gyroscope)
-    Device Orientation (Gyroscope; Raw & Calibrated)
-    Magnetic Field (Magnetometer; Raw & Calibrated)
-    Compass
-    Barometric Altitude (Barometer), Atmospheric Pressure
-    GPS: Altitude, Speed, Heading, Latitude, Longitude
-    Audio (Microphone)
-    Loudness (Microphone), Sound Meter
-    Camera Images (Front & Back, Foreground)
-    Camera Depth (Front & Back, Foreground, iOS Only)
-    Camera Video (Front & Back, Foreground)
-    Pedometer
-    Activity
-    Heart Rate
-    Wrist Motion
-    Watch Location
-    Watch Barometer
-    Watch Magnetometer
-    Watch Compass
-    Watch Microphone
-    Light Sensor (Android Only)
-    Annotations (Timestamp and Text)
-    Device Battery Level and State
-    Device Screen Brightness Level
-    Nearby Bluetooth Beacons (All Advertised Data)
-    Nearby WiFi Networks (Android Only)
-    Battery Temperature (Android Only)
-    Headphone Motion (Requires AirPods)
-    Network
+Sensor Logger is a free, easy-to-use, cross-platform application for recording data from various sensors available on smartphones. It supports exporting recorded data in formats such as CSV, JSON, SQLite, and KML, making it useful for sensor-based research and development.
 
-Learn more and download Sensor Logger at www.tszheichoi.com/sensorlogger.
+For this project, Sensor Logger was used to collect Inertial Measurement Unit (IMU) and GPS data for an IMU–GPS sensor fusion system using GTSAM.
+
+### Sensors Used
+
+The following sensors were used for data collection:
+
+- **Accelerometer:** Records linear acceleration along the X, Y, and Z axes.
+- **Gyroscope:** Records angular velocity along the X, Y, and Z axes.
+- **GPS:** Provides location information, including latitude and longitude, for position estimation.
+
+### Data Collection Configuration
+
+The IMU recording was configured with a target sampling frequency of **250 Hz**. GPS data was recorded separately at a lower sampling frequency.
+
+The collected sensor data was exported into CSV files for further processing, timestamp synchronization, and integration into the sensor fusion pipeline.
+
+The accelerometer and gyroscope measurements were processed to prepare synchronized IMU data, while GPS measurements were organized separately for use in the localization system.
+
+### Purpose of Data Collection
+
+The collected sensor data serves as the input for the IMU–GPS fusion pipeline. The IMU measurements provide information about device motion, while GPS measurements provide position references.
+
+These data sources are used together by the GTSAM-based fusion system to estimate the device's position, orientation, and velocity over time.
+
+### Supported Sensors and Measurements
+
+Sensor Logger supports recording data from a wide range of smartphone sensors and device features, including:
+
+- Accelerometer and gravity vector
+- Gyroscope and device orientation
+- Magnetometer and compass
+- GPS location, altitude, speed, and heading
+- Barometer and atmospheric pressure
+- Microphone and audio measurements
+- Camera images, video, and depth (where supported)
+- Pedometer and activity data
+- Device battery level and state
+- Additional sensors and device information, depending on the platform
+
+### Application Link
+
+Learn more and download Sensor Logger:
+
+[https://www.tszheichoi.com/sensorlogger](https://www.tszheichoi.com/sensorlogger)
 
 
 The project uses three input CSV files.
