@@ -197,7 +197,7 @@ output/Synchronized_IMU.csv
 
 GPS provides latitude and longitude in geographic coordinates.
 
-The `https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM/blob/main/output/GPS_ENU.csv` script uses UTM projection to obtain metric Easting and Northing coordinates. It then subtracts the initial position to create a local reference frame.
+The `gps_to_enu.py` script uses UTM projection to obtain metric Easting and Northing coordinates. It then subtracts the initial position to create a local reference frame.
 
 The output represents:
 
