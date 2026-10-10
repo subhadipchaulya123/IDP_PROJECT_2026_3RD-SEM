@@ -21,6 +21,12 @@ The project uses Python for data processing and GTSAM for the fusion algorithm.
 
 GPS measurements are noisy and relatively low-frequency, while IMU measurements provide high-frequency motion information but suffer from accumulated drift. This project addresses the problem by fusing GPS and IMU data using GTSAM to estimate a consistent trajectory
 
+  **Problem:**
+
+How can GPS position measurements and high-frequency IMU measurements be combined using GTSAM to estimate a more consistent trajectory while accounting for GPS noise and IMU drift?
+
+---
+
 
 ## Objectives :
 
