@@ -349,7 +349,7 @@ See [Coordinate System](https://github.com/subhadipchaulya123/imu_gps_gtsam_____
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/subhadipchaulya123/IDP_PROJECT_2026_3RD-SEM
+https://github.com/subhadipchaulya123/imu_gps_gtsam
 cd imu_gps_gtsam
 ```
 
