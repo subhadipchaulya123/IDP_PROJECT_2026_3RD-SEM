@@ -93,3 +93,7 @@ To generate the plot, run:
 
 ```bash
 python scripts/plot_trajectory.py
+
+
+
+<img width="3000" height="2400" alt="Fused_Trajectory" src="https://github.com/user-attachments/assets/02dd016f-3c42-42ae-99dd-c045f77d1f94" />
