@@ -20,6 +20,8 @@ For example, when a phone lies flat with its screen facing upward, the Android g
 
 **Important:** Confirm whether your CSV contains raw, uncalibrated, or gravity-compensated acceleration before using the measurements in GTSAM.
 
+<img width="1080" height="992" alt="IMG_20261016_220726" src="https://github.com/user-attachments/assets/50305495-726a-40a1-a3bd-bc2e6dd88982" />
+
 ### 2. Gyroscope Coordinate System
 
 The gyroscope measures angular velocity around the same device-local X, Y, and Z axes.
@@ -31,6 +33,9 @@ The gyroscope measures angular velocity around the same device-local X, Y, and Z
 Angular velocity is typically expressed in radians per second (rad/s), but the actual units must be verified from the recorded data.
 
 The gyroscope's axes rotate with the device. Therefore, gyroscope measurements must be interpreted using the phone's orientation and the coordinate-frame conventions of the fusion algorithm.
+
+<img width="1080" height="948" alt="IMG_20261016_220800" src="https://github.com/user-attachments/assets/fd479175-d40a-49b6-84d0-7c5ce59f371d" />
+
 
 ### 3. Android Orientation Convention
 
