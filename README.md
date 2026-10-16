@@ -219,7 +219,7 @@ gx, gy, gz
 
 Provides geographic position measurements, including latitude, longitude, altitude, and timestamps.
 
-**Understanding Units**
+##**Understanding Units**
 
 See [UNITS](https://github.com/subhadipchaulya123/imu_gps_gtsam_____IDP_PROJECT_2026_3RD_SEM/blob/main/UNITS.md)
 
